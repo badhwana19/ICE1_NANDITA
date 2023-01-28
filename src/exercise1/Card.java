@@ -16,6 +16,14 @@ public class Card {
    private int value;//1-13
 
    public static final String [] SUITS = {"Hearts", "Diamonds", "Spades", "Clubs"};
+    public Card(int value, String suit) {
+         this.suit = suit;
+        this.value = value;
+}
+
+    public Card() {
+    }
+
     /**
      * @return the suit
      */
@@ -37,10 +45,26 @@ public class Card {
         return value;
     }
 
+    @Override
+    public String toString() {
+        return "Card [suit=" + suit + ", value=" + value + "]";
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) return true;
+        if (!(other instanceof Card)) return false;
+        Card otherCard = (Card) other;
+        return this.value == otherCard.value && this.suit == otherCard.suit;
+    }
+
     /**
      * @param value the value to set
      */
     public void setValue(int value) {
         this.value = value;
+    }
+
+    public void printInfo() {
     }  
 }

@@ -1,4 +1,6 @@
 package exercise1;
+import java.util.*;
+import java.util.Random;
 
 /**
  * A class that fills a hand of 7 cards with random Card Objects and then asks the user to pick a card.
@@ -23,7 +25,15 @@ public class CardTrick {
             //card.setSuit(Card.SUITS[insert call to random number between 0-3 here])
             // Hint: You can use Random -> random.nextInt(n) to get a random number between 0 and n-1 (inclusive)
             //       Don't worry about duplicates at this point
+            int a = (int) (Math.random() * 13) + 1;
+            card.setValue(a);
+            int b = (int) (Math.random() * 4);
+            card.setSuit(card.SUITS[b]);
+            System.out.println(a);
+            System.out.println(b);
+            hand[i] = card;
         }
+        
 
         // insert code to ask the user for Card value and suit, create their card
         // and search the hand here. 
@@ -35,7 +45,36 @@ public class CardTrick {
         
         // If the guess is successful, invoke the printInfo() method below.
         
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter card value: (1-13)");
+        int value = sc.nextInt();
+        if(value == 11) value = 11;
+        else if(value == 12) value = 12;
+        else if(value == 13) value = 13;
+
+        System.out.println("Enter card suit: (1-4)");
+        String suit = sc.next();
+        if(suit.equals("1")) suit = Card.SUITS[0];
+        else if(suit.equals("2")) suit = Card.SUITS[1];
+        else if(suit.equals("3")) suit = Card.SUITS[2];
+        else if(suit.equals("4")) suit = Card.SUITS[3];
+
+        Card userCard = new Card(value,suit);
+
+        Card foundCard = null;
+for (int i = 0; i < hand.length; i++) {
+    if (hand[i].equals(userCard)) {
+        foundCard = hand[i];
+        break;
     }
+}
+
+if (foundCard != null) {
+    printInfo();
+} else {
+    System.out.println("Card not found in hand.");
+}
+}
 
     /**
      * A simple method to print out personal information. Follow the instructions to 
